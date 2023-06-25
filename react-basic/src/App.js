@@ -19,7 +19,9 @@ function App() {
         <Link to="/blogs">Blogs</Link>
       </div>
       <Switch>
-        <Route path="/">Home Page</Route>
+        <Route path="/" exact>
+          Home Page
+        </Route>
         <Route path="/blogs">
           <div className="container">
             <div className="mb-3">
