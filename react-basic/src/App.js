@@ -16,7 +16,10 @@ function App() {
   return (
     <>
       <div>{number}</div>
-      <button onClick={double}>Submit</button>
+      <button className="btn btn-primary" onClick={double}>
+        {/* jsx에서는 class를 js에서 이미 사용하고 있기 때문에 className */}
+        Submit
+      </button>
     </>
   );
 }
