@@ -15,7 +15,14 @@ const ListPage = () => {
     getPosts(); // state가 업데이트 돼도 처음 한번만 실행
   }, []);
 
-  return <div>List Page</div>;
+  return (
+    <div>
+      <h1>Blogs</h1>
+      {posts.map((post) => {
+        return <div key={post.id}>{post.title}</div>;
+      })}
+    </div>
+  );
 };
 
 export default ListPage;
