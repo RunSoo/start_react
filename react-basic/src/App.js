@@ -6,6 +6,7 @@ function App() {
   return (
     <Router>
       <NavBar />
+
       <div className="container">
         <Switch>
           {routes.map((route) => {
@@ -23,4 +24,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;

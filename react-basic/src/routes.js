@@ -1,7 +1,7 @@
 import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
-import ListPage from "./pages/ListPage";
 import EditPage from "./pages/EditPage";
+import ListPage from "./pages/ListPage";
 
 const routes = [
   {
