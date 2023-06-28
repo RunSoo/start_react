@@ -19,6 +19,13 @@ const ListPage = () => {
     getPosts(); // state가 업데이트 돼도 처음 한번만 실행
   }, []);
 
+  const deleteBlog = (e, id) => {
+    e.stopPropagation();
+    axios.delete(`http://localhost:3002/posts/${id}`).then(() => {
+      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id)); // 같지 않을 때만 남겨두기
+    });
+  };
+
   return (
     <div>
       <div className="d-flex justify-content-between">
@@ -40,8 +47,7 @@ const ListPage = () => {
               <button
                 className="btn btn-danger btn-sm"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  console.log("delete");
+                  deleteBlog(e, post.id);
                 }}
               >
                 Delete
