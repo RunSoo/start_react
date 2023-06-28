@@ -36,26 +36,28 @@ const ListPage = () => {
           </Link>
         </div>
       </div>
-      {posts.map((post) => {
-        return (
-          <Card
-            key={post.id}
-            title={post.title}
-            onClick={() => history.push("/blogs/edit")}
-          >
-            <div>
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={(e) => {
-                  deleteBlog(e, post.id);
-                }}
+      {posts.length > 0
+        ? posts.map((post) => {
+            return (
+              <Card
+                key={post.id}
+                title={post.title}
+                onClick={() => history.push("/blogs/edit")}
               >
-                Delete
-              </button>
-            </div>
-          </Card>
-        );
-      })}
+                <div>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={(e) => {
+                      deleteBlog(e, post.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </Card>
+            );
+          })
+        : "No Blog Posts Found"}
     </div>
   );
 };
