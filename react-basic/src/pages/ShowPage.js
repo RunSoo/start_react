@@ -16,7 +16,7 @@ const ShowPage = () => {
 
   useEffect(() => {
     getPost(id);
-  }, []);
+  }, [id]); // 의존성 배열
 
   if (loading) {
     return <LoadingSpinner />;
