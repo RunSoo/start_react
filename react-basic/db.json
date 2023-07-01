@@ -1,16 +1,18 @@
 {
   "posts": [
     {
-      "title": "이것은 제목",
-      "body": "이것은 내용1",
-      "createdAt": 1688183760321,
-      "id": 4
-    },
-    {
       "title": "title2",
       "body": "body2",
       "createdAt": 1688187452960,
-      "id": 5
+      "id": 5,
+      "publish": false
+    },
+    {
+      "title": "3",
+      "body": "3",
+      "createdAt": 1688189801965,
+      "publish": true,
+      "id": 6
     }
   ]
 }
