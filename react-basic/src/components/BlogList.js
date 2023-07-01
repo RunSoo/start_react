@@ -12,14 +12,19 @@ const BlogList = ({ isAdmin }) => {
   const [loading, setLoading] = useState(true);
 
   const getPosts = (page = 1) => {
+    let params = {
+      _page: page,
+      _limit: 5,
+      _sort: "id",
+      _order: "desc",
+    };
+
+    if (!isAdmin) {
+      params = { ...params, publish: true };
+    }
     axios
       .get(`http://localhost:3002/posts`, {
-        params: {
-          _page: page,
-          _limit: 5,
-          _sort: "id",
-          _order: "desc",
-        },
+        params,
       })
       .then((res) => {
         console.log(res.data);
