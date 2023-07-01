@@ -12,6 +12,7 @@ const BlogForm = () => {
       .post("http://localhost:3002/posts", {
         title,
         body,
+        createdAt: Date.now(),
       })
       .then(() => {
         history.push("/blogs");
