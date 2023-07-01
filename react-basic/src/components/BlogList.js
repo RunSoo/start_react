@@ -11,12 +11,16 @@ const BlogList = ({ isAdmin }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getPosts = () => {
-    axios.get("http://localhost:3002/posts").then((res) => {
-      console.log(res.data);
-      setPosts(res.data);
-      setLoading(false);
-    });
+  const getPosts = (page = 1) => {
+    axios
+      .get(
+        `http://localhost:3002/posts?_page=${page}&_limit=5&_sort=id&_order=desc`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setPosts(res.data);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
