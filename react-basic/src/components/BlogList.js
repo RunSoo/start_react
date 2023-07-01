@@ -13,9 +13,14 @@ const BlogList = ({ isAdmin }) => {
 
   const getPosts = (page = 1) => {
     axios
-      .get(
-        `http://localhost:3002/posts?_page=${page}&_limit=5&_sort=id&_order=desc`
-      )
+      .get(`http://localhost:3002/posts`, {
+        params: {
+          _page: page,
+          _limit: 5,
+          _sort: "id",
+          _order: "desc",
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setPosts(res.data);
