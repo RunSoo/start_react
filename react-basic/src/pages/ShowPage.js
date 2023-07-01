@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const ShowPage = () => {
   const { id } = useParams(); // routes.js랑 같은 값으로 (id) 해야 가져올 수 있음
@@ -28,7 +29,14 @@ const ShowPage = () => {
 
   return (
     <div>
-      <h1>{post.title}</h1>
+      <div className="d-flex">
+        <h1 className="flex-grow-1">{post.title}</h1>
+        <div>
+          <Link className="btn btn-primary" to={`/blogs/${id}/edit`}>
+            Edit
+          </Link>
+        </div>
+      </div>
       <small class="text-muted">Created At: {printDate(post.createdAt)}</small>
       <hr />
       <p>{post.body}</p>
