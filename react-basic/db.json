@@ -13,6 +13,13 @@
       "createdAt": 1688189801965,
       "publish": true,
       "id": 6
+    },
+    {
+      "title": "새 글 제목",
+      "body": "내용",
+      "createdAt": 1688198349067,
+      "publish": true,
+      "id": 7
     }
   ]
 }

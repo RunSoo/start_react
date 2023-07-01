@@ -69,7 +69,7 @@ const BlogForm = ({ editing }) => {
           publish,
         })
         .then(() => {
-          history.push("/blogs");
+          history.push("/admin");
         });
     }
   };
