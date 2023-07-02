@@ -6,6 +6,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import propTypes from "prop-types";
 import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
+import Toast from "../components/Toast";
 
 const BlogList = ({ isAdmin }) => {
   const history = useHistory();
@@ -110,6 +111,12 @@ const BlogList = ({ isAdmin }) => {
 
   return (
     <div>
+      <Toast
+        toasts={[
+          { text: "error", type: "danger" },
+          { text: "sucess", type: "success" },
+        ]}
+      />
       <input
         type="text"
         className="form-control"
