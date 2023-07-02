@@ -67,20 +67,26 @@ const BlogList = ({ isAdmin }) => {
     getPosts();
   }, []);
 
-  const addToast = (toast) => {
-    const toastWithId = {
-      ...toast,
-      id: uuidv4(),
-    };
-    setToasts((prev) => [...prev, toastWithId]);
-  };
-
   const deleteToast = (id) => {
     const filteredToasts = toasts.filter((toast) => {
       return toast.id !== id;
     });
 
     setToasts(filteredToasts);
+  };
+
+  const addToast = (toast) => {
+    const id = uuidv4();
+    const toastWithId = {
+      ...toast,
+      id: id,
+    };
+    setToasts((prev) => [...prev, toastWithId]);
+
+    setTimeout(() => {
+      // 5초 후에 이 안에 있는 함수 실행
+      deleteToast(id);
+    }, 5000);
   };
 
   const deleteBlog = (e, id) => {
