@@ -7,6 +7,7 @@ import propTypes from "prop-types";
 import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
 import Toast from "../components/Toast";
+import { v4 as uuidv4 } from "uuid";
 
 const BlogList = ({ isAdmin }) => {
   const history = useHistory();
@@ -19,6 +20,7 @@ const BlogList = ({ isAdmin }) => {
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [searchText, setSearchText] = useState("");
+  const [toasts, setToasts] = useState([]);
   const limit = 5;
 
   useEffect(() => {
@@ -65,10 +67,30 @@ const BlogList = ({ isAdmin }) => {
     getPosts();
   }, []);
 
+  const addToast = (toast) => {
+    const toastWithId = {
+      ...toast,
+      id: uuidv4(),
+    };
+    setToasts((prev) => [...prev, toastWithId]);
+  };
+
+  const deleteToast = (id) => {
+    const filteredToasts = toasts.filter((toast) => {
+      return toast.id !== id;
+    });
+
+    setToasts(filteredToasts);
+  };
+
   const deleteBlog = (e, id) => {
     e.stopPropagation();
     axios.delete(`http://localhost:3002/posts/${id}`).then(() => {
       setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id)); // 같지 않을 때만 남겨두기
+      addToast({
+        text: "Successfully deleted",
+        type: "success",
+      });
     });
   };
 
@@ -111,12 +133,7 @@ const BlogList = ({ isAdmin }) => {
 
   return (
     <div>
-      <Toast
-        toasts={[
-          { text: "error", type: "danger" },
-          { text: "sucess", type: "success" },
-        ]}
-      />
+      <Toast toasts={toasts} deleteToast={deleteToast} />
       <input
         type="text"
         className="form-control"

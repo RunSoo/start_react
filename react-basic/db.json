@@ -31,13 +31,6 @@
     {
       "title": "ㅇ",
       "body": "ㅇ",
-      "createdAt": 1688293444750,
-      "publish": true,
-      "id": 12
-    },
-    {
-      "title": "ㅇ",
-      "body": "ㅇ",
       "createdAt": 1688293448704,
       "publish": true,
       "id": 13
@@ -69,13 +62,6 @@
       "createdAt": 1688293471618,
       "publish": true,
       "id": 17
-    },
-    {
-      "title": "asdf",
-      "body": "asdgasd",
-      "createdAt": 1688318540833,
-      "publish": false,
-      "id": 18
     }
   ]
 }
