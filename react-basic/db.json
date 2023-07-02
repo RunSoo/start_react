@@ -1,27 +1,6 @@
 {
   "posts": [
     {
-      "title": "title2",
-      "body": "body2",
-      "createdAt": 1688187452960,
-      "id": 5,
-      "publish": false
-    },
-    {
-      "title": "3",
-      "body": "3",
-      "createdAt": 1688189801965,
-      "publish": true,
-      "id": 6
-    },
-    {
-      "title": "새 글 제목",
-      "body": "내용",
-      "createdAt": 1688198349067,
-      "publish": true,
-      "id": 7
-    },
-    {
       "title": "d",
       "body": "d",
       "createdAt": 1688199071230,
