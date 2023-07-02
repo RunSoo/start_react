@@ -1,6 +1,6 @@
 import propTypes from "prop-types";
 
-const Pagination = ({ currentPage, numberOfPages }) => {
+const Pagination = ({ currentPage, numberOfPages, onClick }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
@@ -20,9 +20,14 @@ const Pagination = ({ currentPage, numberOfPages }) => {
                   currentPage === pageNumber ? "active" : ""
                 }`}
               >
-                <a className="page-link" href="#">
+                <div
+                  className="page-link cursor-pointer"
+                  onClick={() => {
+                    onClick(pageNumber);
+                  }}
+                >
                   {pageNumber}
-                </a>
+                </div>
               </li>
             );
           })}
@@ -38,7 +43,8 @@ const Pagination = ({ currentPage, numberOfPages }) => {
 
 Pagination.propTypes = {
   currentPage: propTypes.number,
-  numberOfPages: propTypes.number,
+  numberOfPages: propTypes.number.isRequired,
+  onClick: propTypes.func.isRequired,
 };
 
 Pagination.defaultProps = {
