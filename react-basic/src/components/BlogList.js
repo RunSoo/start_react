@@ -13,7 +13,7 @@ const BlogList = ({ isAdmin }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
-  const limit = 5;
+  const limit = 1;
 
   useEffect(() => {
     setNumberOfPages(Math.ceil(numberOfPosts / limit));
@@ -23,7 +23,7 @@ const BlogList = ({ isAdmin }) => {
     setCurrentPage(page);
     let params = {
       _page: page,
-      _limit: 5,
+      _limit: limit,
       _sort: "id",
       _order: "desc",
     };
@@ -37,7 +37,6 @@ const BlogList = ({ isAdmin }) => {
       })
       .then((res) => {
         setNumberOfPosts(res.headers["x-total-count"]);
-        console.log(res.data);
         setPosts(res.data);
         setLoading(false);
       });
@@ -102,6 +101,14 @@ const BlogList = ({ isAdmin }) => {
       )}
     </div>
   );
+};
+
+BlogList.propTypes = {
+  isAdmin: bool,
+};
+
+BlogList.defaultProps = {
+  isAdmin: false,
 };
 
 export default BlogList;
