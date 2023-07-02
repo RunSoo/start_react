@@ -4,10 +4,8 @@ const Pagination = ({ currentPage, numberOfPages, onClick, limit }) => {
   const currentSet = Math.ceil(currentPage / limit);
   const lastSet = Math.ceil(numberOfPages / limit);
   const startPage = limit * (currentSet - 1) + 1;
-  console.log(startPage);
   const numberOfPageForSet =
     currentSet === lastSet ? numberOfPages % limit : limit;
-
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
@@ -45,9 +43,9 @@ const Pagination = ({ currentPage, numberOfPages, onClick, limit }) => {
             );
           })}
         {currentSet !== lastSet && (
-          <li className="page-item cursor-pointer">
+          <li className="page-item">
             <div
-              className="page-link"
+              className="page-link cursor-pointer"
               href="#"
               onClick={() => onClick(startPage + limit)}
             >
