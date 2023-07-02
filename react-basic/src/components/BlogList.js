@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Card from "../components/Card";
 import { useHistory } from "react-router";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -27,32 +27,35 @@ const BlogList = ({ isAdmin }) => {
     history.push(`${location.pathname}?page=${page}`);
     getPosts(page);
   };
-  const getPosts = (page = 1) => {
-    let params = {
-      _page: page,
-      _limit: limit,
-      _sort: "id",
-      _order: "desc",
-    };
+  const getPosts = useCallback(
+    (page = 1) => {
+      let params = {
+        _page: page,
+        _limit: limit,
+        _sort: "id",
+        _order: "desc",
+      };
 
-    if (!isAdmin) {
-      params = { ...params, publish: true };
-    }
-    axios
-      .get(`http://localhost:3002/posts`, {
-        params,
-      })
-      .then((res) => {
-        setNumberOfPosts(res.headers["x-total-count"]);
-        setPosts(res.data);
-        setLoading(false);
-      });
-  };
+      if (!isAdmin) {
+        params = { ...params, publish: true };
+      }
+      axios
+        .get(`http://localhost:3002/posts`, {
+          params,
+        })
+        .then((res) => {
+          setNumberOfPosts(res.headers["x-total-count"]);
+          setPosts(res.data);
+          setLoading(false);
+        });
+    },
+    [isAdmin]
+  );
 
   useEffect(() => {
     setCurrentPage(parseInt(pageParam) || 1);
     getPosts(parseInt(pageParam) || 1);
-  }, [pageParam]);
+  }, [pageParam, getPosts]);
 
   useEffect(() => {
     getPosts();
