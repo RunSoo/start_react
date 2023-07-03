@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Card from "../components/Card";
 import { useHistory } from "react-router";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -20,8 +20,9 @@ const BlogList = ({ isAdmin }) => {
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [searchText, setSearchText] = useState("");
-  const [toasts, setToasts] = useState([]);
   const limit = 5;
+  const [, setToastRerender] = useState(false);
+  const toasts = useRef([]);
 
   useEffect(() => {
     setNumberOfPages(Math.ceil(numberOfPosts / limit));
@@ -68,11 +69,12 @@ const BlogList = ({ isAdmin }) => {
   }, []);
 
   const deleteToast = (id) => {
-    const filteredToasts = toasts.filter((toast) => {
+    const filteredToasts = toasts.current.filter((toast) => {
       return toast.id !== id;
     });
 
-    setToasts(filteredToasts);
+    toasts.current = filteredToasts;
+    setToastRerender((prev) => !prev);
   };
 
   const addToast = (toast) => {
@@ -81,7 +83,8 @@ const BlogList = ({ isAdmin }) => {
       ...toast,
       id: id,
     };
-    setToasts((prev) => [...prev, toastWithId]);
+    toasts.current = [...toasts.current, toastWithId];
+    setToastRerender((prev) => !prev);
 
     setTimeout(() => {
       // 5초 후에 이 안에 있는 함수 실행
@@ -139,7 +142,7 @@ const BlogList = ({ isAdmin }) => {
 
   return (
     <div>
-      <Toast toasts={toasts} deleteToast={deleteToast} />
+      <Toast toasts={toasts.current} deleteToast={deleteToast} />
       <input
         type="text"
         className="form-control"
