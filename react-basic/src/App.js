@@ -9,15 +9,17 @@ function App() {
   return (
     <Router>
       <NavBar />
-      <Toast toasts={toasts} celeteToast={deleteToast} />
+      <Toast toasts={toasts} deleteToast={deleteToast} />
       <div className="container mt-3">
         <Switch>
           {routes.map((route) => {
-            const Component = route.component;
             return (
-              <Route key={route.path} exact path={route.path}>
-                <Component addToast={addToast} />
-              </Route>
+              <Route
+                key={route.path}
+                exact
+                path={route.path}
+                component={route.component}
+              ></Route>
             );
           })}
         </Switch>

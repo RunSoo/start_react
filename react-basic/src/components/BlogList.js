@@ -23,7 +23,7 @@ const BlogList = ({ isAdmin }) => {
 
   const limit = 5;
 
-  const [toasts, addToast, deleteToast] = useToast();
+  const { addToast } = useToast();
 
   useEffect(() => {
     setNumberOfPages(Math.ceil(numberOfPosts / limit));
@@ -119,7 +119,6 @@ const BlogList = ({ isAdmin }) => {
 
   return (
     <div>
-      <Toast toasts={toasts} deleteToast={deleteToast} />
       <input
         type="text"
         className="form-control"
