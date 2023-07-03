@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Card from "../components/Card";
 import { useHistory } from "react-router";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -7,7 +7,7 @@ import propTypes from "prop-types";
 import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
 import Toast from "../components/Toast";
-import { v4 as uuidv4 } from "uuid";
+import useToast from "../hooks/toast";
 
 const BlogList = ({ isAdmin }) => {
   const history = useHistory();
@@ -21,8 +21,8 @@ const BlogList = ({ isAdmin }) => {
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [searchText, setSearchText] = useState("");
   const limit = 5;
-  const [, setToastRerender] = useState(false);
-  const toasts = useRef([]);
+
+  const [toasts, addToast, deleteToast] = useToast();
 
   useEffect(() => {
     setNumberOfPages(Math.ceil(numberOfPosts / limit));
@@ -67,30 +67,6 @@ const BlogList = ({ isAdmin }) => {
   useEffect(() => {
     getPosts();
   }, []);
-
-  const deleteToast = (id) => {
-    const filteredToasts = toasts.current.filter((toast) => {
-      return toast.id !== id;
-    });
-
-    toasts.current = filteredToasts;
-    setToastRerender((prev) => !prev);
-  };
-
-  const addToast = (toast) => {
-    const id = uuidv4();
-    const toastWithId = {
-      ...toast,
-      id: id,
-    };
-    toasts.current = [...toasts.current, toastWithId];
-    setToastRerender((prev) => !prev);
-
-    setTimeout(() => {
-      // 5초 후에 이 안에 있는 함수 실행
-      deleteToast(id);
-    }, 5000);
-  };
 
   const deleteBlog = (e, id) => {
     e.stopPropagation();
@@ -142,7 +118,7 @@ const BlogList = ({ isAdmin }) => {
 
   return (
     <div>
-      <Toast toasts={toasts.current} deleteToast={deleteToast} />
+      <Toast toasts={toasts} deleteToast={deleteToast} />
       <input
         type="text"
         className="form-control"
