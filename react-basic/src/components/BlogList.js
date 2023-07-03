@@ -8,7 +8,6 @@ import Pagination from "./Pagination";
 import { useLocation } from "react-router-dom";
 import Toast from "../components/Toast";
 import useToast from "../hooks/toast";
-import { UseSelector } from "react-redux/es/hooks/useSelector";
 
 const BlogList = ({ isAdmin }) => {
   const history = useHistory();
@@ -21,9 +20,7 @@ const BlogList = ({ isAdmin }) => {
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [searchText, setSearchText] = useState("");
-  const toasts = useSelector((state) => {
-    return state.toast.toasts;
-  });
+
   const limit = 5;
 
   const [toasts, addToast, deleteToast] = useToast();
